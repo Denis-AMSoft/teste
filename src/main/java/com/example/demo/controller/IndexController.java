@@ -11,7 +11,7 @@ public class IndexController {
 	
 	@GetMapping
 	public String index() {
-		return "forward:index.xhtml";
+		return "forward:Login.xhtml";
 	}
 
 }
