@@ -58,6 +58,7 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Reserva> reservas;
 
+	@Column(unique = true)
 	private boolean sindico;
 
 	@NotNull

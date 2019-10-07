@@ -2,6 +2,7 @@ package com.example.demo.model.enums;
 
 public enum TipoUsuario {
 	
+	ADMINISTRADOR("Administrador"),
 	SINDICO("Sindico"),
 	MORADOR( "Morador");
 		

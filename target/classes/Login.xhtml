@@ -25,7 +25,6 @@
 		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
 	</f:metadata>
 
-
 	<div id="login" style="text-align: center">
 		<h:form id="frm" prependId="false" styleClass="semBorda">
 
@@ -42,7 +41,11 @@
 				</p>
 				<p>
 					<p:password size="30" id="password" placeholder="Senha" />
-					<p:link outcome="/redefinirSenha" value="Redefinir Senha" />
+				<p>
+					<p:link outcome="/redefinirSenha" value="Redefinir Senha"
+						style="margin-top: 10px" />
+				</p>
+
 				</p>
 				<p>
 					<h:commandButton value="Login" action="#{loginBean.login}"
