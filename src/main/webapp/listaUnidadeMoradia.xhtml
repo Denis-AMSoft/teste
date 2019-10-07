@@ -1,0 +1,75 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/resources/templates/base.xhtml">
+
+	<f:metadata>
+		<f:viewAction action="#{listaMoradiaBean.consultar}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Cadastro Unidade Moradia</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frm" styleClass="form-principal">
+
+			<h:panelGrid columns="1" styleClass="grid-titulos">
+				<h:outputLabel value="Pesquisa" styleClass="titulo1"></h:outputLabel>
+				<h:outputLabel value="Unidades De Moradia" styleClass="titulo2"></h:outputLabel>
+			</h:panelGrid>
+
+			<p:fieldset class="grupo-geral">
+				<h:panelGrid columns="2" styleClass="grid-titulo-pesquisa">
+					<div class="barra-vertical"></div>
+					<h:outputLabel value="Pesquisar" styleClass="titulo-pesquisa"></h:outputLabel>
+				</h:panelGrid>
+
+				<p:messages id="msg" closable="true" autoUpdate="true" />
+
+				<p:dataTable value="#{listaMoradiaBean.listUnidadeMoradia}"
+					var="unidade" emptyMessage="Nenhuma unidade cadastrada." rows="15"
+					paginator="true" paginatorPosition="bottom" styleClass="myTable"
+					style="margin-top: 10px" id="unidades-table" reflow="true"
+					paginatorAlwaysVisible="false" rowKey="#{unidade.codigo}">
+
+					<p:column style="text-align: center; width: 100px"
+						exportable="false" headerText="Opções">
+
+						<p:commandButton icon="fa far fa-trash-alt" title="Excluir"
+							class="button-pesquisa" process="@this"
+							update=":frm:unidades-table :frm:msg"
+							action="#{listaMoradiaBean.excluir(unidade)}">
+							<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
+								message="Tem certeza que deseja excluir o usuario" />
+						</p:commandButton>
+
+					</p:column>
+
+					<p:column headerText="Unidade"
+						style="text-align: center; width: 100px" exportable="false">
+						<p:outputLabel value="#{unidade.unidade}" />
+					</p:column>
+
+					<p:column headerText="Morador"
+						style="text-align: center; width: 100px" exportable="false">
+						<p:outputLabel value="#{unidade.usuario.nome}" />
+					</p:column>
+
+					<p:column headerText="Status"
+						style="text-align: center; width: 100px" exportable="false">
+						<p:selectOneMenu id="car" value="#{unidade.statusUnidadeMoradia}">
+							<f:selectItems value="#{unidadeMoradiaBean.statusCadastros}" />
+							<f:ajax event="change" listener="#{unidadeMoradiaBean.salvarMoradia(unidade)}"  />
+						</p:selectOneMenu>
+					</p:column>
+
+					<f:facet name="footer">
+									(#{listaMoradiaBean.listUnidadeMoradia.size()}) registros
+				    			</f:facet>
+				</p:dataTable>
+
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

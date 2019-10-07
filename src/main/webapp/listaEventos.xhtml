@@ -1,0 +1,101 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/resources/templates/base.xhtml">
+
+	<f:metadata>
+		<f:viewAction action="#{listaEventosBean.consultar}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Eventos</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frm" styleClass="form-principal">
+
+			<h:panelGrid columns="1" styleClass="grid-titulos">
+				<h:outputLabel value="Pesquisa" styleClass="titulo1"></h:outputLabel>
+				<h:outputLabel value="Eventos" styleClass="titulo2"></h:outputLabel>
+			</h:panelGrid>
+
+			<p:fieldset class="grupo-geral">
+				<h:panelGrid columns="2" styleClass="grid-titulo-pesquisa">
+					<div class="barra-vertical"></div>
+					<h:outputLabel value="Pesquisar" styleClass="titulo-pesquisa"></h:outputLabel>
+				</h:panelGrid>
+
+				<p:messages id="msg" closable="true" autoUpdate="true" />
+
+				<p:dataTable value="#{listaEventosBean.todosEventos}" var="reserva"
+					emptyMessage="Nenhum cadastrado." rows="15"
+					paginator="true" paginatorPosition="bottom" styleClass="myTable"
+					style="margin-top: 10px" id="usuarios-table" reflow="true"
+					paginatorAlwaysVisible="true" rowKey="#{reserva.codigo}">
+
+					<p:column style="text-align: center; width: 100px"
+						exportable="false" headerText="Opções">
+
+						<p:button icon="fa far fa-pencil-alt" title="Editar"
+							class="button-pesquisa" outcome="cadastroEvento">
+							<f:param name="reserva" value="#{reserva.codigo}" />
+						</p:button>
+
+						<p:commandButton icon="fa far fa-trash-alt" title="Excluir"
+							class="button-pesquisa" process="@this" disabled="#{reserva.statusReserva != 'CONCLUIDO'}"
+							update=":frm:usuarios-table :frm:msg"
+							action="#{listaEventosBean.excluir(reserva)}">
+							<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
+								message="Tem certeza que deseja excluir o usuario" />
+						</p:commandButton>
+
+					</p:column>
+
+					<p:column headerText="Nome"
+						style="text-align: center; width: 100px" exportable="false">
+						<h:outputText value="#{reserva.usuario.nome}" />
+					</p:column>
+
+					<p:column headerText="Unidade"
+						style="text-align: center; width: 50px" exportable="false">
+						<h:outputText value="#{reserva.usuario.moradia.unidade}" />
+					</p:column>
+					<p:column headerText="Data de Inicio"
+						style="text-align: center; width: 50px" exportable="false">
+						<h:outputText value="#{reserva.dataInicial}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+						</h:outputText>
+					</p:column>
+					<p:column headerText="Data Final"
+						style="text-align: center; width: 50px" exportable="false">
+						<h:outputText value="#{reserva.dataFinal}" >
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+						</h:outputText>
+					</p:column>
+
+					<p:column headerText="Descricao"
+						style="text-align: center; width: 100px" exportable="false">
+						<h:outputText value="#{reserva.descricao}" />
+					</p:column>
+
+					<p:column headerText="Status"
+						style="text-align: center; width: 100px" exportable="false">
+						<p:selectOneMenu id="car" value="#{reserva.statusReserva}" disabled="#{reserva.statusReserva == 'CONCLUIDO'}" > 
+							<f:selectItems value="#{listaEventosBean.statusReserva}" />
+							<f:ajax event="change"
+								listener="#{listaEventosBean.salvarEvento(reserva)}" />
+						</p:selectOneMenu>
+					</p:column>
+
+
+					<f:facet name="footer">
+									(#{listaEventosBean.todosEventos.size()}) registros
+				    			</f:facet>
+				</p:dataTable>
+
+			</p:fieldset>
+		</h:form>
+
+	</ui:define>
+
+</ui:composition>

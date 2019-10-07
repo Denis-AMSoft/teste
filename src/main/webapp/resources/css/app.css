@@ -1,0 +1,39 @@
+body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.box {
+	background-color: #fff;
+	color: #1e94d2;
+	padding: 30px 12px;
+	/*margin: 10px;*/
+}
+
+.box>h2 {
+	font-size: 13px;
+	font-weight: normal;
+	background-color: #fff;
+	color: #1e94d2;
+	padding: 0;
+	margin: 0;
+	color: #1e94d2;
+}
+
+.box>span {
+	font-size: 26px;
+	font-weight: 400;
+	background-color: #fff;
+	color: #1e94d2;
+}
+
+/* @media (min-width: 640px) { */
+/* 	.box { */
+/* 		float: left; */
+/* 		width: calc(50% - 50px); */
+/* 	} */
+/* } */
+/* @media (min-width: 960px) { */
+/* 	.box { */
+/* 		width: calc(33.33% - 50px); */
+/* 	} */
+/* } */

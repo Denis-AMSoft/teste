@@ -1,0 +1,119 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/resources/templates/base.xhtml">
+
+	<f:metadata>
+		<o:viewParam name="usuario" value="#{usuariosBean.usuario}" />
+		<f:viewAction action="#{usuariosBean.inicializar}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Cadastro Usuarios</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frm" styleClass="form-principal">
+
+			<h:panelGrid columns="1" styleClass="grid-titulos">
+				<h:outputLabel value="Cadastro" styleClass="titulo1"></h:outputLabel>
+				<h:outputLabel value="Usuários" styleClass="titulo2"></h:outputLabel>
+			</h:panelGrid>
+
+			<p:fieldset class="grupo-geral">
+
+				<h:panelGrid columns="2" styleClass="grid-titulo-pesquisa">
+					<div class="barra-vertical"></div>
+					<h:outputLabel
+						value="#{usuariosBean.editando ? 'Edição de usuário': 'Novo usuário'}"
+						styleClass="titulo-pesquisa"></h:outputLabel>
+				</h:panelGrid>
+
+				<p:messages id="msg" closable="true" />
+
+				<div id="campos" class="ui-fluid">
+
+					<p:panelGrid columns="2" layout="grid" style="margin-top: 20px"
+						styleClass="semBorda" id="usuarios-tipos"
+						columnClasses="ui-grid-col-2, ui-grid-col-4">
+
+						<h1>Tipo de Usuario</h1>
+						<p:outputLabel />
+
+						<p:selectBooleanCheckbox id="morador"
+							value="#{usuariosBean.morador}" itemLabel="Morador"
+							required="true">
+							<p:ajax process="@this" update="usuarios-tipos"
+								listener="#{usuariosBean.mostarCampos}" />
+						</p:selectBooleanCheckbox>
+
+						<p:selectBooleanCheckbox id="sindico"
+							value="#{usuariosBean.sindico}" itemLabel="Sindico" />
+
+						<p:row id="camposMoradia" rendered="#{usuariosBean.ativar}">
+							<p:outputLabel value="Unidade De Moradia" for="unidadeMoradia" />
+							<p:inputMask mask="999" id="unidadeMoradia"
+								value="#{usuariosBean.usuario.moradia.unidade}" />
+						</p:row>
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="2" layout="grid" style="margin-top: 20px"
+						styleClass="semBorda" id="usuarios-table"
+						columnClasses="ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Status Usuario" />
+						<p:outputLabel value="#{usuariosBean.usuario.statusUsuario}" />
+
+						<p:outputLabel value="Codigo" for="codigo" />
+						<p:outputLabel id="codigo" readonly="true"
+							value="#{usuariosBean.usuario.codigo}" />
+
+						<p:outputLabel value="Nome" for="nome" />
+						<p:inputText id="nome" required="true"
+							value="#{usuariosBean.usuario.nome}" />
+
+						<p:outputLabel value="CPF" for="cpf" />
+						<p:inputMask id="cpf" size="11" maxlength="18" required="true"
+							value="#{usuariosBean.usuario.cpf}" mask="999.999.999-99" />
+
+						<p:outputLabel value="E-mail" for="email" />
+						<p:inputText id="email" required="true"
+							value="#{usuariosBean.usuario.email}">
+							<p:keyFilter regEx="/[a-z0-9_\.\-@]/i" />
+						</p:inputText>
+
+						<p:outputLabel value="Usermane" for="username" />
+						<p:inputText id="username" required="true"
+							value="#{usuariosBean.usuario.username}" />
+
+						<p:outputLabel value="Senha" for="senha" />
+						<p:password id="senha" required="true"
+							value="#{usuariosBean.usuario.password}" feedback="true"
+							weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
+							promptLabel="Informe uma senha" inline="true" redisplay="true"
+							match="confirmacaoSenha" />
+
+						<p:outputLabel value="Confirme a senha" for="confirmacaoSenha" />
+						<p:password id="confirmacaoSenha" required="true" redisplay="true"
+							weakLabel="Fraca" goodLabel="Boa" strongLabel="Forte"
+							promptLabel="Confirme sua senha" inline="true" feedback="true"
+							value="#{usuariosBean.usuario.password}" />
+					</p:panelGrid>
+
+
+				</div>
+
+				<center>
+
+					<p:commandButton value="Salvar" icon="fa far fa-save"
+						style="margin-top: 20px" process="@form" class="button-salvar"
+						id="salvar-button" action="#{usuariosBean.novoUsuario}"
+						update="msg usuarios-table" />
+
+				</center>
+
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

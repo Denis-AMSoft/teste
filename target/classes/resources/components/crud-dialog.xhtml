@@ -1,0 +1,61 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!-- INTERFACE -->
+<cc:interface>
+	<cc:attribute name="title" type="java.lang.String"
+		required="true" />
+	<cc:attribute name="showEffect" type="java.lang.String" />
+	<cc:attribute name="hideEffect" type="java.lang.String" />
+	<cc:attribute name="dialogId" type="java.lang.String"
+		required="true" />
+	<cc:attribute name="widgetVar" type="java.lang.String"
+		required="true" />
+	<cc:attribute name="onSaveUpdate" type="java.lang.String"
+		required="true" />
+	<cc:attribute name="onCancelUpdate" type="java.lang.String"
+		required="true" />
+	<cc:attribute name="onSaveAction"
+		method-signature="void action()" required="true" />
+	<cc:attribute name="onCancelAction"
+		method-signature="void action()" required="true" />
+</cc:interface>
+<!-- IMPLEMENTATION -->
+<cc:implementation>
+	<p:dialog id="#{cc.attrs.dialogId}" 
+		widgetVar="#{cc.attrs.widgetVar}" 
+		header="#{cc.attrs.title}" modal="true" resizable="false"
+		closable="false" appendTo="@(body)"
+		showEffect="#{cc.attrs.showEffect}"
+		hideEffect="#{cc.attrs.hideEffect}">
+		<h:form id="form">
+			<p:focus context="form" />
+			<!-- CONTEÚDO DINÂMICO -->
+			<cc:insertChildren></cc:insertChildren>
+			<p:separator />
+			<div align="right">
+				<p:commandButton value="Salvar"
+					styleClass="ui-confirmdialog-yes"
+					icon="ui-icon-check"
+					action="#{cc.attrs.onSaveAction}"
+					update="#{cc.attrs.onSaveUpdate}"
+					process="@form" />
+				<p:commandButton value="Cancelar"
+					styleClass="ui-confirmdialog-no"
+					icon="ui-icon-close"
+					action="#{cc.attrs.onCancelAction}"
+					update="#{cc.attrs.onCancelUpdate}"
+					process="@this" />
+			</div>
+		</h:form>
+	</p:dialog>
+</cc:implementation>
+
+</html>
+
+
+
+
+

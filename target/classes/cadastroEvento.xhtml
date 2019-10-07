@@ -1,0 +1,91 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/resources/templates/base.xhtml">
+
+	<f:metadata>
+		<o:viewParam name="reserva" value="#{cadastroEventoBean.reserva}" />
+		<f:viewAction action="#{cadastroEventoBean.inicializar}" />
+	</f:metadata>
+
+	<ui:define name="titulo">Cadastro Eventos</ui:define>
+	<ui:define name="conteudo">
+
+		<h:form id="frm" styleClass="form-principal">
+
+			<h:panelGrid columns="1" styleClass="grid-titulos">
+				<h:outputLabel value="Cadastro" styleClass="titulo1"></h:outputLabel>
+				<h:outputLabel value="Eventos" styleClass="titulo2"></h:outputLabel>
+			</h:panelGrid>
+
+			<p:fieldset class="grupo-geral">
+
+				<h:panelGrid columns="2" styleClass="grid-titulo-pesquisa">
+					<div class="barra-vertical"></div>
+					<h:outputLabel
+						value="#{cadastroEventoBean.editando ? 'Edição de Evento': 'Novo Evento'}"
+						styleClass="titulo-pesquisa"></h:outputLabel>
+				</h:panelGrid>
+
+				<p:messages id="msg" closable="true" />
+
+				<div id="campos" class="ui-fluid">
+
+					<p:panelGrid columns="2" layout="grid" style="margin-top: 20px"
+						styleClass="semBorda" id="usuarios-tipos"
+						columnClasses="ui-grid-col-2, ui-grid-col-4">
+
+						<p:outputLabel value="Nome do Usuario : " />
+						<p:inputText value="#{cadastroEventoBean.reserva.usuario.nome}"
+							readonly="true" />
+
+						<p:outputLabel value="Unidade do Usuario : " />
+						<p:inputText
+							value="#{cadastroEventoBean.reserva.usuario.moradia.unidade}"
+							readonly="true" />
+
+						<p:outputLabel value="Data Inicial : " />
+						<p:calendar value="#{cadastroEventoBean.reserva.dataInicial}"
+							navigator="true" label="Data inicial" pattern="dd/MM/yyyy HH:mm"
+							mindate="#{cadastroEventoBean.hoje}" mask="true" locale="pt">
+							<p:ajax event="dateSelect" update="dataFinal" />
+						</p:calendar>
+
+						<p:outputLabel value="Data Final : " />
+						<p:calendar id="dataFinal"
+							value="#{cadastroEventoBean.reserva.dataFinal}" navigator="true"
+							mask="true" label="Data final"
+							mindate="#{cadastroEventoBean.reserva.dataInicial}"
+							pattern="dd/MM/yyyy HH:mm" locale="pt" />
+
+						<p:outputLabel value="Descrição do Evento :" />
+						<p:inputTextarea rows="6" cols="40"
+							value="#{cadastroEventoBean.reserva.descricao}" />
+
+						<p:outputLabel value="Assinatura : " />
+						<p:row>
+							<p:signature style="width:400px;height:200px" widgetVar="sig"
+								value="#{cadastroEventoBean.reserva.assinatura}"
+								guideline="true" />
+
+							<div style="margin: 20px 0">
+								<p:commandButton value="Clear" icon="pi pi-times" type="button"
+									style="width: 100px; height:40px; text-align: center"
+									onclick="PF('sig').clear()" />
+							</div>
+						</p:row>
+					</p:panelGrid>
+				</div>
+				<center>
+					<p:commandButton value="Salvar" icon="fa far fa-save"
+						style="margin-top: 20px" process="@form" class="button-salvar"
+						id="salvar-button" action="#{cadastroEventoBean.novoEvento}"
+						update="msg " />
+
+				</center>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

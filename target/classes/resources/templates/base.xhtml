@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<link rel="stylesheet"
+		href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+		integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"></link>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<!-- ALTERAR TÍTULO DA PÁGINA -->
+	<title><ui:insert name="titulo"></ui:insert></title>
+
+	<h:outputStylesheet library="css" name="custom_styles.css" />
+	<h:outputStylesheet library="css" name="sistema.css" />
+	<h:outputStylesheet library="css" name="app.css" />
+	<h:outputScript target="body" library="primefaces" name="jquery/jquery.js" />
+	<h:outputScript library="js" name="jquery.maskMoney.js" />
+	<h:outputScript library="js" name="primefaces-pt.js" />
+</h:head>
+<h:body>
+
+
+	<p:layout fullPage="true">
+		<!-- TOPO -->
+		<p:layoutUnit position="north">
+			<ui:include src="cabecalho.xhtml" />
+		</p:layoutUnit>
+		<!-- MENU LATERAL ESQUERDO -->
+		<p:layoutUnit position="west" header="Menu" size="250"
+			collapsible="true">
+			<ui:include src="menu.xhtml" />
+		</p:layoutUnit>
+		<!-- CENTRO -->
+		<p:layoutUnit position="center">
+			<!-- CONTEÚDO DINÂMICO -->
+			<ui:insert name="conteudo"></ui:insert>
+		</p:layoutUnit>
+	</p:layout>
+	<!-- MENSAGENS -->
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<!-- CONFIRMAÇÃO -->
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+		<p:commandButton value="Sim" type="button"
+			styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+		<p:commandButton value="Não" type="button"
+			styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+	</p:confirmDialog>
+	<!-- EXIBE GIF EM REQUISIÇÕES AJAX -->
+	<p:ajaxStatus id="ajaxStatusPanel"
+		style="position: absolute; right: 3%; top: 90%;">
+		<f:facet name="start">
+			<h:graphicImage value="/resources/img/loading.gif" />
+		</f:facet>
+		<f:facet name="complete">
+			<h:outputText />
+		</f:facet>
+	</p:ajaxStatus>
+</h:body>
+</html>
+
+
+
+
+
+

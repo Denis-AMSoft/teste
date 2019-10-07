@@ -1,0 +1,76 @@
+body {
+	margin: 0px;
+	font-size: 14px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-form {
+	left: 50%;
+	margin-top: 20vh;
+	padding: 20px 50px;
+	background-color: rgba(0, 0, 0, .9);
+	transform: translateY(-50%);
+	background-color: #f2f2f2;
+	border-radius: 8px;
+}
+
+.button-login {
+	background-color: #E7780F; /* Blue */
+	border: none;
+	color: white;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.button-logout {
+	background: white !important;
+	color: #E7780F !important;
+	border: none;
+	padding: 15px 32px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 2px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+#outer {
+	position: relative;
+	width: 100%;
+}
+
+#inner {
+	left: 50%;
+	position: absolute;
+	transform: translateX(-50%);
+}
+
+.login-form h1 {
+	margin: 0 0 5px;
+	background-color: #f2f2f2;
+}
+
+.login-form h2 {
+	margin: 0 0 30px;
+	font-size: 1em;
+	background-color: #f2f2f2;
+}
+
+.form-signin-heading, .checkbox {
+	margin-bottom: 30px;
+}
+
+.aw-page-title {
+	margin: 0;
+	padding: 10px 0;
+	font-size: 1.5em;
+	color: #373737;
+}

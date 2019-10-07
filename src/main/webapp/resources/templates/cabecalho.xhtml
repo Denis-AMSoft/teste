@@ -1,0 +1,40 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+	<h:form>
+		<div style="float: left; margin-left: 15px; margin-top: 5px">
+			<p:menubar>
+				<p:menuitem>
+					<p:link outcome="index" title="Home">
+						<h:graphicImage value="/resources/img/logo.png" width="81"
+							height="30" style="margin: 10px;" />
+					</p:link>
+				</p:menuitem>
+			</p:menubar>
+		</div>
+
+		<div style="float: right; margin-right: 20px;">
+			<h:form style="display: inline-block">
+				<p:row>
+
+					<p:row rendered="#{seguranca.usuarioLogado.usuario.codigo != null}">
+						<p:outputLabel
+							value="#{seguranca.usuarioLogado.usuario.statusUsuario.descricao} : Procure o Administrador"
+							rendered="#{seguranca.usuarioLogado.usuario.statusUsuario != 'ATIVO'}"
+							style=" margin-right: 20px" />
+
+					</p:row>
+					<p:outputLabel value="#{seguranca.nomeUsuario}"
+						style=" margin-right: 20px" />
+
+					<p:linkButton rendered="#{seguranca.usuarioLogado != null}"
+						value="Sair" href="#{request.contextPath}/logout" />
+				</p:row>
+
+			</h:form>
+		</div>
+
+	</h:form>
+</ui:fragment>

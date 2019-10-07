@@ -1,0 +1,24 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui">
+	
+<!-- INTERFACE -->
+<cc:interface>
+	<cc:attribute name="value" type="java.lang.Boolean"
+		required="true" />
+</cc:interface>
+<!-- IMPLEMENTATION -->
+<cc:implementation>
+	<p:selectBooleanCheckbox disabled="true" 
+		value="#{cc.attrs.value}"
+		styleClass="read-only-checkbox" />
+	<script type="text/javascript">
+		$(function(){
+			$('.read-only-checkbox').find('div')
+				.removeClass('ui-state-disabled');
+		});
+	</script>
+</cc:implementation>
+
+	
+</html>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title><ui:insert>Login</ui:insert></title>
+	<h:outputStylesheet library="css" name="login.css" />
+	<h:outputScript target="body" library="primefaces"
+		name="jquery/jquery.js" />
+	<h:outputStylesheet library="css" name="style.css" />
+	<h:outputScript library="js" name="index.js" />
+
+	<link rel='stylesheet'
+		href='https://fonts.googleapis.com/css?family=Open+Sans:400,300' />
+</h:head>
+<h:body>
+	<f:metadata>
+		<f:viewParam name="dummy" />
+		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+	</f:metadata>
+
+
+	<div id="login" style="text-align: center">
+		<h:form id="frm" prependId="false" styleClass="semBorda">
+
+			<p:fieldset styleClass="semBorda"
+				style="width: 34%; text-align: center;">
+				<p:messages id="messages" autoUpdate="true" closable="true" />
+				<p>
+					<h:graphicImage value="/resources/img/logo.png" height="70"
+						width="300" />
+				</p>
+				<p>
+					<p:inputText size="30" id="username" value="#{loginBean.email}"
+						placeholder="E-mail" />
+				</p>
+				<p>
+					<p:password size="30" id="password" placeholder="Senha" />
+					<p:link outcome="/redefinirSenha" value="Redefinir Senha" />
+				</p>
+				<p>
+					<h:commandButton value="Login" action="#{loginBean.login}"
+						styleClass="btn-login" ajax="false" />
+				</p>
+				<p:link outcome="/cadastroUsuario" value="Cadastrar Novo Usuario" />
+			</p:fieldset>
+
+		</h:form>
+	</div>
+</h:body>
+</html>
