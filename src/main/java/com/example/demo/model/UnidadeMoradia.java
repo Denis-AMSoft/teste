@@ -13,7 +13,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import com.example.demo.model.enums.StatusCadastro;
 
@@ -27,7 +26,6 @@ public class UnidadeMoradia implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long codigo;
 
-	@NotNull
 	private Integer unidade;
 
 	@OneToOne(cascade = CascadeType.ALL ,fetch =  FetchType.EAGER)

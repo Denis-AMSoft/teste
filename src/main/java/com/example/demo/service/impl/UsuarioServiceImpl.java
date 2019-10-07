@@ -31,7 +31,11 @@ public class UsuarioServiceImpl implements UsuarioService {
 	@Transactional
 	public Usuario salvar(Usuario usuario) {
 		if (usuario.getCodigo() == null) {
-			usuario.getMoradia().setStatusUnidadeMoradia(StatusCadastro.PEDENTE);
+			if (usuario.getMoradia().getUnidade().equals(000)) {
+				usuario.getMoradia().setStatusUnidadeMoradia(StatusCadastro.INATIVO);
+			} else {
+				usuario.getMoradia().setStatusUnidadeMoradia(StatusCadastro.PEDENTE);
+			}
 		}
 		usuario.setPermissao(getPermissao(usuario));
 		usuario.setPassword(encoder.encode(usuario.getPassword()));
@@ -63,7 +67,12 @@ public class UsuarioServiceImpl implements UsuarioService {
 
 	@Override
 	public Usuario getSindico() {
-		return usuarioRepositorio.findBySindicoTrue();
+		Usuario usuario = usuarioRepositorio.findBySindicoTrue();
+		if (usuario != null) {
+			return usuario;
+		} else {
+			return new Usuario();
+		}
 	}
 
 	@Override

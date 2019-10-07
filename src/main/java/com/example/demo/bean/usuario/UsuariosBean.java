@@ -73,7 +73,10 @@ public class UsuariosBean implements Serializable {
 	public void novoUsuario() {
 		try {
 			if (morador) {
-				usuario.setTipoUsuario(TipoUsuario.MORADOR);
+				usuario.setTipoUsuario(TipoUsuario.MORADOR);	
+			}else {
+				usuario.getMoradia().setUnidade(000);
+				usuario.setTipoUsuario(TipoUsuario.SINDICO);
 			}
 			if (sindico == true) {
 				if (existeSindico() == true) {
@@ -88,6 +91,7 @@ public class UsuariosBean implements Serializable {
 			FacesUtil.addInfoMessage("Usuario " + usuario.getNome() + "  salvo !!");
 			FacesUtil.addInfoMessage("Unidade N°:  " + usuario.getMoradia().getUnidade() + "  salvo !!");
 		} catch (Exception e) {
+			e.printStackTrace();
 			FacesUtil.addErrorMessage("ERRO :" + e.getMessage() + " - " + e.getCause());
 			FacesUtil.addFatalMessage(e.getMessage());
 		}

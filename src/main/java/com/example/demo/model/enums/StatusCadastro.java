@@ -3,6 +3,7 @@ package com.example.demo.model.enums;
 public  enum StatusCadastro {
 	
 	ATIVO("Ativo"),
+	INATIVO("Inativo"),
 	PEDENTE("Pedente"),
 	CADASTRO("Cadastro"), 
 	EXCUIDO("Excluido");
