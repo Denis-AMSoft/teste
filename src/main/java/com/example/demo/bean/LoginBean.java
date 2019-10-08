@@ -47,6 +47,10 @@ public class LoginBean implements Serializable {
 			FacesUtil.addErrorMessage("Usuário ou senha inválido!");
 		}
 	}
+	
+	public void redicionarPagina() {
+		FacesUtil.redirecionarPagina("index.xhtml");
+	}
 
 	public void login() {
 		try {

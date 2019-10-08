@@ -105,6 +105,9 @@ public class HomeBean implements Serializable {
 	public void redicionaCadastroUsuario() {
 		FacesUtil.redirecionarPagina("cadastroUsuario.xhtml?usuario="+seguranca.getUsuarioLogado().getUsuario().getCodigo());
 	}
+	public void redicionarPagina() {
+		FacesUtil.redirecionarPagina("index.xhtml");
+	}
 
 	public StatusReserva[] getstatusReservas() {
 		return StatusReserva.values();

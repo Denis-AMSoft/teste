@@ -28,8 +28,8 @@
 				<p:messages id="msg" closable="true" autoUpdate="true" />
 
 				<p:dataTable value="#{listaEventosBean.todosEventos}" var="reserva"
-					emptyMessage="Nenhum cadastrado." rows="15"
-					paginator="true" paginatorPosition="bottom" styleClass="myTable"
+					emptyMessage="Nenhum cadastrado." rows="15" paginator="true"
+					paginatorPosition="bottom" styleClass="myTable"
 					style="margin-top: 10px" id="usuarios-table" reflow="true"
 					paginatorAlwaysVisible="true" rowKey="#{reserva.codigo}">
 
@@ -42,7 +42,8 @@
 						</p:button>
 
 						<p:commandButton icon="fa far fa-trash-alt" title="Excluir"
-							class="button-pesquisa" process="@this" disabled="#{reserva.statusReserva != 'CONCLUIDO'}"
+							class="button-pesquisa" process="@this"
+							disabled="#{reserva.statusReserva != 'CONCLUIDO'}"
 							update=":frm:usuarios-table :frm:msg"
 							action="#{listaEventosBean.excluir(reserva)}">
 							<p:confirm icon="ui-icon-alert" header="Confirmação de exclusão"
@@ -63,13 +64,15 @@
 					<p:column headerText="Data de Inicio"
 						style="text-align: center; width: 50px" exportable="false">
 						<h:outputText value="#{reserva.dataInicial}">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</p:column>
 					<p:column headerText="Data Final"
 						style="text-align: center; width: 50px" exportable="false">
-						<h:outputText value="#{reserva.dataFinal}" >
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" timeZone="America/Sao_Paulo" />
+						<h:outputText value="#{reserva.dataFinal}">
+							<f:convertDateTime pattern="dd/MM/yyyy HH:mm"
+								timeZone="America/Sao_Paulo" />
 						</h:outputText>
 					</p:column>
 
@@ -80,18 +83,25 @@
 
 					<p:column headerText="Status"
 						style="text-align: center; width: 100px" exportable="false">
-						<p:selectOneMenu id="car" value="#{reserva.statusReserva}" disabled="#{reserva.statusReserva == 'CONCLUIDO'}" > 
+						<p:selectOneMenu id="car" value="#{reserva.statusReserva}"
+							disabled="#{reserva.statusReserva == 'CONCLUIDO'}">
 							<f:selectItems value="#{listaEventosBean.statusReserva}" />
 							<f:ajax event="change"
 								listener="#{listaEventosBean.salvarEvento(reserva)}" />
 						</p:selectOneMenu>
 					</p:column>
 
-
 					<f:facet name="footer">
 									(#{listaEventosBean.todosEventos.size()}) registros
 				    			</f:facet>
 				</p:dataTable>
+
+				<center>
+					<p:commandButton value="Voltar"
+						icon="fa far fa-arrow-alt-circle-left" style="margin-top: 20px"
+						class="button-salvar" immediate="true" id="voltar-button"
+						action="#{loginBean.redicionarPagina}" update="msg" />
+				</center>
 
 			</p:fieldset>
 		</h:form>

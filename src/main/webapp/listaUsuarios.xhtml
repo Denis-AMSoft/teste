@@ -28,8 +28,7 @@
 				<p:toolbar id="toolbar" style=" margin-top:15px">
 					<p:toolbarGroup>
 						<p:button class="button-pesquisa" icon="fa fas fa-plus-circle"
-							value="Novo usuário" outcome="/cadastroUsuario"
-							process="@this">
+							value="Novo usuário" outcome="/cadastroUsuario" process="@this">
 						</p:button>
 
 					</p:toolbarGroup>
@@ -74,6 +73,13 @@
 									(#{listaUsuariosBean.todosusuarios.size()}) registros
 				    			</f:facet>
 				</p:dataTable>
+
+				<center>
+					<p:commandButton value="Voltar"
+						icon="fa far fa-arrow-alt-circle-left" style="margin-top: 20px"
+						class="button-salvar" immediate="true" id="voltar-button"
+						action="#{loginBean.redicionarPagina}" update="msg" />
+				</center>
 
 			</p:fieldset>
 		</h:form>

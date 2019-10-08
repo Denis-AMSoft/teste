@@ -60,7 +60,8 @@
 						style="text-align: center; width: 100px" exportable="false">
 						<p:selectOneMenu id="car" value="#{unidade.statusUnidadeMoradia}">
 							<f:selectItems value="#{unidadeMoradiaBean.statusCadastros}" />
-							<f:ajax event="change" listener="#{unidadeMoradiaBean.salvarMoradia(unidade)}"  />
+							<f:ajax event="change"
+								listener="#{unidadeMoradiaBean.salvarMoradia(unidade)}" />
 						</p:selectOneMenu>
 					</p:column>
 
@@ -68,6 +69,13 @@
 									(#{listaMoradiaBean.listUnidadeMoradia.size()}) registros
 				    			</f:facet>
 				</p:dataTable>
+
+				<center>
+					<p:commandButton value="Voltar"
+						icon="fa far fa-arrow-alt-circle-left" style="margin-top: 20px"
+						class="button-salvar" immediate="true" id="voltar-button"
+						action="#{loginBean.redicionarPagina}" update="msg" />
+				</center>
 
 			</p:fieldset>
 		</h:form>
