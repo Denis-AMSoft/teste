@@ -27,11 +27,11 @@
 
 		</p:toolbar>
 
-		<p:schedule value="#{homeBean.reservas}" locale="pt" view="month" rightHeaderTemplate=""
-			style="margin-top:15px" draggable="false" widgetVar="myschedule"
-			initialDate="#{homeBean.hoje}">
+		<p:schedule value="#{homeBean.reservas}" locale="pt" view="month"
+			rightHeaderTemplate="" style="margin-top:15px" draggable="false"
+			widgetVar="myschedule" initialDate="#{homeBean.hoje}">
 
-			<!-- 	<p:ajax event="dateSelect" listener="#{homeBean.onDateSelect}"
+<!-- 			<p:ajax event="dateSelect" listener="#{homeBean.onDateSelect}"
 				update="eventDetails" oncomplete="PF('eventDialog').show();" /> -->
 			<p:ajax event="eventSelect" listener="#{homeBean.onEventSelect}"
 				update="eventDetails" oncomplete="PF('eventDialog').show();" />

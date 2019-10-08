@@ -48,10 +48,6 @@ public class LoginBean implements Serializable {
 		}
 	}
 	
-	public void redicionarPagina() {
-		FacesUtil.redirecionarPagina("index.xhtml");
-	}
-
 	public void login() {
 		try {
 			usuario = usuarioService.porEmail(email);

@@ -105,10 +105,10 @@
 
 				<center>
 
-					<p:commandButton value="Voltar"
+					<p:button value="Voltar" outcome="/index"
 						icon="fa far fa-arrow-alt-circle-left" style="margin-top: 20px"
 						class="button-salvar" immediate="true" id="voltar-button"
-						action="#{loginBean.redicionarPagina}" update="msg" />
+						update="msg" />
 
 					<p:commandButton value="Salvar" icon="fa far fa-save"
 						style="margin-top: 20px" process="@form" class="button-salvar"

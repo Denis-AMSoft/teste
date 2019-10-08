@@ -76,8 +76,8 @@ public class HomeBean implements Serializable {
 		reserva = new Reserva();
 		event = new DefaultScheduleEvent("", (Date) selectEvent.getObject(), (Date) selectEvent.getObject());
 		reserva.setUsuario(seguranca.getUsuarioLogado().getUsuario());
-		reserva.setDataInicial(hoje);
-		reserva.setDataFinal(hoje);
+		reserva.setDataInicial(event.getStartDate());
+		reserva.setDataFinal(event.getEndDate());
 	}
 
 	public void onEventSelect(SelectEvent selectEvent) {
@@ -104,9 +104,6 @@ public class HomeBean implements Serializable {
 	
 	public void redicionaCadastroUsuario() {
 		FacesUtil.redirecionarPagina("cadastroUsuario.xhtml?usuario="+seguranca.getUsuarioLogado().getUsuario().getCodigo());
-	}
-	public void redicionarPagina() {
-		FacesUtil.redirecionarPagina("index.xhtml");
 	}
 
 	public StatusReserva[] getstatusReservas() {
