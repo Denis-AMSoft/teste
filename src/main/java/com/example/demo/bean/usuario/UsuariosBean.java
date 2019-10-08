@@ -116,6 +116,10 @@ public class UsuariosBean implements Serializable {
 			ativar = false;
 		}
 	}
+	
+	public void redicionarPagina() {
+		FacesUtil.redirecionarPagina("index.xhtml");
+	}
 
 	public Usuario getUsuario() {
 		return usuario;
