@@ -96,7 +96,8 @@ h1 {
 
 
 .ui-panelgrid td {
-	height: 34px
+	border: none !important;
+	height: 34px;
 }
 
 .ajax-status {

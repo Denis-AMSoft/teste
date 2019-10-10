@@ -25,17 +25,38 @@
 					<h:outputLabel value="Pesquisar" styleClass="titulo-pesquisa"></h:outputLabel>
 				</h:panelGrid>
 
+				<p:messages id="msg" closable="true" autoUpdate="true" />
+
+				<div id="campos" class="ui-fluid">
+					<p:focus context="painel" />
+					<p:panelGrid columns="4" id="painel" layout="grid"
+						styleClass="panelgrid-noborder "
+						columnClasses="ui-grid-col-2,ui-grid-col-4, ui-grid-col-2,ui-grid-col-4">
+						
+						<p:outputLabel value="Nome" />
+						<p:inputText value="" />
+
+						<p:outputLabel value="Email" />
+						<p:inputText value="" />
+						
+						<p:outputLabel value="Status" />
+						<p:inputText value="" />
+						
+						<p:commandButton icon="fas fas fa-file-export "  class="button-login" />
+						<p:commandButton class="button-pesquisa" icon="fa fas fa-search"
+							value="Pesquisar"  process="@this">
+						</p:commandButton>
+
+					</p:panelGrid>
+				</div>
+
 				<p:toolbar id="toolbar" style=" margin-top:15px">
 					<p:toolbarGroup>
 						<p:button class="button-pesquisa" icon="fa fas fa-plus-circle"
 							value="Novo usuário" outcome="/cadastroUsuario" process="@this">
 						</p:button>
-
 					</p:toolbarGroup>
-
 				</p:toolbar>
-
-				<p:messages id="msg" closable="true" autoUpdate="true" />
 
 				<p:dataTable value="#{listaUsuariosBean.todosusuarios}"
 					var="usuario" emptyMessage="Nenhum usuário cadastrado." rows="15"
@@ -67,6 +88,10 @@
 
 					<p:column headerText="Email" sortBy="#{usuario.email}">
 						<h:outputText value="#{usuario.email}" />
+					</p:column>
+
+					<p:column headerText="Status" sortBy="#{usuario.statusUsuario}">
+						<h:outputText value="#{usuario.statusUsuario}" />
 					</p:column>
 
 					<f:facet name="footer">
