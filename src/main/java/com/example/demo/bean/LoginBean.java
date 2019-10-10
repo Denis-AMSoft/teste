@@ -8,7 +8,9 @@ import javax.inject.Named;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import com.example.demo.model.Usuario;
 import com.example.demo.service.UsuarioService;
 import com.example.demo.util.FacesUtil;

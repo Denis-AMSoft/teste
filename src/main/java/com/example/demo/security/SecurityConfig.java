@@ -50,6 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/listaEventos.xhtml").hasAnyRole("SINDICO")
 				.and()
 				.formLogin().loginPage("/Login.xhtml")
+				.defaultSuccessUrl("/index.xhtml")
 				.failureUrl("/Login.xhtml?invalid=true")
 				.and()
 				.logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).invalidateHttpSession(true)
