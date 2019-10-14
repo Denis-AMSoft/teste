@@ -3,6 +3,7 @@ package com.example.demo.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TimeZone;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
@@ -58,7 +59,8 @@ public class EmailServiceImpl implements EmailService {
 	@Async
 	public void enviarNovoEvento(Reserva reserva) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		dt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
 
 		String dataInicial = dt.format(reserva.getDataInicial());
 
@@ -88,7 +90,8 @@ public class EmailServiceImpl implements EmailService {
 	@Async
 	public void enviar(Reserva reserva) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		dt.setTimeZone(TimeZone.getTimeZone("America/Sao_Paulo"));
 
 		String dataInicial = dt.format(reserva.getDataInicial());
 
