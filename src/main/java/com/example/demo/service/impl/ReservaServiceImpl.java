@@ -54,7 +54,7 @@ public class ReservaServiceImpl implements ReservaService {
 			Long iniRESERVA2 =  reserva2.getDataInicial().getTime();
 			Long fimRESERVA2 = reserva2.getDataFinal().getTime();
 			
-			if (iniRESERVA <= iniRESERVA2) {
+			if (iniRESERVA >= iniRESERVA2) {
 				if (fimRESERVA <= fimRESERVA2) {
 					throw new NegocioException("Ja Existe Reserva neste peiodo");
 				}
