@@ -12,7 +12,7 @@ import javax.faces.convert.ConverterException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LocalDateConverter implements Converter {
+public class LocalDateConverter implements Converter<Object> {
 	
 	private DateTimeFormatter formatter = 
 			DateTimeFormatter.ofPattern("dd/MM/yyyy");

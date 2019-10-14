@@ -14,7 +14,10 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.scheduling.annotation.EnableAsync;
 
+
+@EnableAsync
 @SpringBootApplication
 @EnableAutoConfiguration(exclude = MailSenderValidatorAutoConfiguration.class)
 @ComponentScan(basePackages = { "com.example.demo" })

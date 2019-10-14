@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Mensagem;
@@ -30,6 +31,7 @@ public class EmailServiceImpl implements EmailService {
 	 *envia Moradia
 	 */
 	@Override
+	@Async
 	public void enviarMoradia(UnidadeMoradia moradia) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
@@ -53,6 +55,7 @@ public class EmailServiceImpl implements EmailService {
 	 *Envia para o Sindico
 	 */
 	@Override
+	@Async
 	public void enviarNovoEvento(Reserva reserva) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -82,6 +85,7 @@ public class EmailServiceImpl implements EmailService {
 	/**
 	 *Envia para Usuario
 	 */
+	@Async
 	public void enviar(Reserva reserva) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 		SimpleDateFormat dt = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
@@ -110,6 +114,7 @@ public class EmailServiceImpl implements EmailService {
 	 *Envia para o Sindico
 	 */
 	@Override
+	@Async
 	public void enviarNovoUsuario(Usuario usuario) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
@@ -134,6 +139,7 @@ public class EmailServiceImpl implements EmailService {
 	 *Envia nova senha de Usuario
 	 */
 	@Override
+	@Async
 	public void enviarSenhaNova(Usuario usuario, String senha) {
 		SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
 
