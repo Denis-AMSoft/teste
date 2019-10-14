@@ -1,6 +1,5 @@
 package com.example.demo.service.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,14 +44,29 @@ public class ReservaServiceImpl implements ReservaService {
 	}
 
 	private void verificaHorarioReserva(Reserva reserva) {
+		Long iniRESERVA = reserva.getDataInicial().getTime();
+		Long fimRESERVA = reserva.getDataFinal().getTime();
 		List<Reserva> reservas = todos();
 		for (Reserva reserva2 : reservas) {
-			Date inicio = new Date(reserva2.getDataInicial().getTime());
-			Date fim = new Date(reserva2.getDataFinal().getTime());
-
-			if (reserva.getDataFinal().before(fim) && reserva.getDataInicial().after(inicio)) {
-				throw new NegocioException("Ja Existe Reserva neste peiodo");
+			//Date inicio = new Date(reserva2.getDataInicial().getTime());
+			//Date fim = new Date(reserva2.getDataFinal().getTime());
+			
+			Long iniRESERVA2 =  reserva2.getDataInicial().getTime();
+			Long fimRESERVA2 = reserva2.getDataFinal().getTime();
+			
+			if (iniRESERVA <= iniRESERVA2) {
+				if (fimRESERVA <= fimRESERVA2) {
+					throw new NegocioException("Ja Existe Reserva neste peiodo");
+				}
 			}
+			
+
+			//   before =  for anterior à data2          after = for posterior à data1
+			/*
+			 * if (reserva.getDataFinal().before(fim) &&
+			 * reserva.getDataInicial().after(inicio)) { throw new
+			 * NegocioException("Ja Existe Reserva neste peiodo"); }
+			 */
 		}
 	}
 
