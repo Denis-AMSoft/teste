@@ -14,7 +14,6 @@ import com.example.demo.model.enums.StatusCadastro;
 import com.example.demo.repository.ReservaRepository;
 import com.example.demo.service.ReservaService;
 import com.example.demo.service.UsuarioService;
-import com.example.demo.util.FacesUtil;
 import com.example.demo.util.NegocioException;
 
 @Service
@@ -39,27 +38,17 @@ public class ReservaServiceImpl implements ReservaService {
 	@Override
 	@Transactional
 	public void salvar(Reserva reserva) {
-		if (isTermoResposabilidade(reserva.getTermoDeUso())) {
 
-			Usuario usuario = usuarioService.porId(reserva.getUsuario().getCodigo());
-			verificaUsuarioAtivo(usuario);
-			if (reserva.getCodigo() == null) {
-				verificaHorarioReserva(reserva);
-			}
+		Usuario usuario = usuarioService.porId(reserva.getUsuario().getCodigo());
+		verificaUsuarioAtivo(usuario);
+		if (reserva.getCodigo() == null) {
 			verificaHorarioReserva(reserva);
-			
-			reserva.setUsuario(usuario);
-			reservaRepository.saveAndFlush(reserva);
 		}
-	}
+		
+		
+		reserva.setUsuario(usuario);
+		reservaRepository.saveAndFlush(reserva);
 
-	private boolean isTermoResposabilidade(Boolean termoDeUso) {
-		if (termoDeUso.booleanValue()) {
-			return true;
-		}else {
-			FacesUtil.addWarnMessageDetail("O Termo de Uso não foi Aceito");
-			return false;
-		}
 	}
 
 	private void verificaHorarioReserva(Reserva reserva) {

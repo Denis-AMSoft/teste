@@ -46,20 +46,6 @@
 							value="#{cadastroEventoBean.reserva.usuario.moradia.unidade}"
 							readonly="true" />
 
-						<p:outputLabel value="Data Inicial : " />
-						<p:calendar value="#{cadastroEventoBean.reserva.dataInicial}"
-							navigator="true" label="Data inicial" pattern="dd/MM/yyyy HH:mm"
-							mindate="#{cadastroEventoBean.hoje}" mask="true" locale="pt">
-							<p:ajax event="dateSelect" update="dataFinal" />
-						</p:calendar>
-
-						<p:outputLabel value="Data Final : " />
-						<p:calendar id="dataFinal"
-							value="#{cadastroEventoBean.reserva.dataFinal}" navigator="true"
-							mask="true" label="Data final"
-							mindate="#{cadastroEventoBean.reserva.dataInicial}"
-							pattern="dd/MM/yyyy HH:mm" locale="pt" />
-
 						<p:outputLabel value="Tipo Evento : " />
 						<p:selectOneMenu value="#{cadastroEventoBean.reserva.tipoevento}">
 							<f:selectItems var="tipoEvento"
@@ -78,8 +64,24 @@
 								value="#{cadastroEventoBean.reserva.descricao}" />
 						</p:row>
 
+
+						<p:outputLabel value="Data Inicial : " />
+						<p:calendar value="#{cadastroEventoBean.reserva.dataInicial}"
+							navigator="true" label="Data inicial" pattern="dd/MM/yyyy HH:mm"
+							mindate="#{cadastroEventoBean.hoje}" mask="true" locale="pt">
+							<p:ajax event="dateSelect" update="dataFinal" />
+						</p:calendar>
+
+						<p:outputLabel value="Data Final : " />
+						<p:calendar id="dataFinal"
+							value="#{cadastroEventoBean.reserva.dataFinal}" navigator="true"
+							mask="true" label="Data final"
+							mindate="#{cadastroEventoBean.reserva.dataInicial}"
+							pattern="dd/MM/yyyy HH:mm" locale="pt" />
+
+
 						<p:outputLabel value="Quantidade de Pessoas :" />
-						<p:inputNumber
+						<p:inputMask mask="99"
 							value="#{cadastroEventoBean.reserva.quantidadePessoal}" />
 
 						<p:outputLabel value="Assinatura : " />
@@ -98,13 +100,16 @@
 						<p:row>
 							<p>
 								Eu
-								<p:commandLink value="aceito os termos" ajax="false" immediate="true" >
-									<p:fileDownload value="#{cadastroEventoBean.termoDeUso()}"  />
+								<p:commandLink value="aceito os termos" ajax="false"
+									immediate="true">
+									<p:fileDownload value="#{cadastroEventoBean.termoDeUso()}" />
 								</p:commandLink>
 								e condições:
-								<p:selectBooleanButton id="aceitoTermo"
-									value="#{cadastroEventoBean.reserva.termoDeUso}" onLabel="Sim"
-									offLabel="Não" style="width:60px" />
+								<p:selectBooleanCheckbox id="aceitoTermo"
+									value="#{cadastroEventoBean.termo}" >
+									 <p:ajax process="@this" update="usuarios-tipos"
+								listener="#{cadastroEventoBean.ativaTermo}" />
+						</p:selectBooleanCheckbox>
 							</p>
 
 						</p:row>
@@ -118,7 +123,7 @@
 						class="button-salvar" immediate="true" id="voltar-button"
 						update="msg" />
 
-					<p:commandButton value="Salvar" icon="fa far fa-save"
+					<p:commandButton value="Salvar" icon="fa far fa-save" immediate="true"
 						style="margin-top: 20px" process="@form" class="button-salvar"
 						id="salvar-button" action="#{cadastroEventoBean.novoEvento}"
 						update="msg " />
