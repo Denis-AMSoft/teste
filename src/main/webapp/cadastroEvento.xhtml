@@ -46,8 +46,11 @@
 							value="#{cadastroEventoBean.reserva.usuario.moradia.unidade}"
 							readonly="true" />
 
-						<p:outputLabel value="Tipo Evento : " />
-						<p:selectOneMenu value="#{cadastroEventoBean.reserva.tipoevento}">
+						<p:outputLabel value="Tipo Evento : " for="tipoEvento" />
+						<p:selectOneMenu id="tipoEvento" required="true"
+							requiredMessage="Necessario Tipo Evento"
+							value="#{cadastroEventoBean.reserva.tipoevento}">
+							<f:selectItem itemLabel="Selecione ..." noSelectionOption="true" />
 							<f:selectItems var="tipoEvento"
 								value="#{cadastroEventoBean.tipoEvento}"
 								itemLabel="#{tipoEvento.descricao}" itemValue="#{tipoEvento}" />
@@ -65,24 +68,32 @@
 						</p:row>
 
 
-						<p:outputLabel value="Data Inicial : " />
-						<p:calendar value="#{cadastroEventoBean.reserva.dataInicial}"
+						<p:outputLabel value="Data Inicial : " for="dataIni" />
+						<p:calendar id="dataIni"
+							requiredMessage="Necessario ter Data Inicial"
+							value="#{cadastroEventoBean.reserva.dataInicial}" required="true"
 							navigator="true" label="Data inicial" pattern="dd/MM/yyyy HH:mm"
 							mindate="#{cadastroEventoBean.hoje}" mask="true" locale="pt">
-							<p:ajax event="dateSelect" update="dataFinal" />
+							<p:ajax event="dateSelect" update="dataFin" />
 						</p:calendar>
 
-						<p:outputLabel value="Data Final : " />
-						<p:calendar id="dataFinal"
+						<p:outputLabel value="Data Final : " for="dataFin" />
+						<p:calendar id="dataFin" required="true"
+							requiredMessage="Necessario ter Data Final"
 							value="#{cadastroEventoBean.reserva.dataFinal}" navigator="true"
 							mask="true" label="Data final"
 							mindate="#{cadastroEventoBean.reserva.dataInicial}"
-							pattern="dd/MM/yyyy HH:mm" locale="pt" />
+							pattern="dd/MM/yyyy HH:mm" locale="pt">
+							<p:ajax event="change" update="frm" process="@this" />
+						</p:calendar>
 
 
-						<p:outputLabel value="Quantidade de Pessoas :" />
-						<p:inputMask mask="99"
-							value="#{cadastroEventoBean.reserva.quantidadePessoal}" />
+						<p:outputLabel value="Quantidade de Pessoas :" for="quantPessoas" />
+						<p:inputMask mask="99" id="quantPessoas" required="true"
+							requiredMessage="Necessario Informar Quantidade Pessoas"
+							value="#{cadastroEventoBean.reserva.quantidadePessoal}">
+							<p:ajax event="change" update="frm" process="@this" />
+						</p:inputMask>
 
 						<p:outputLabel value="Assinatura : " />
 						<p:row>
@@ -98,6 +109,7 @@
 						</p:row>
 						<p:outputLabel />
 						<p:row>
+
 							<p>
 								Eu
 								<p:commandLink value="aceito os termos" ajax="false"
@@ -106,10 +118,10 @@
 								</p:commandLink>
 								e condições:
 								<p:selectBooleanCheckbox id="aceitoTermo"
-									value="#{cadastroEventoBean.termo}" >
-									 <p:ajax process="@this" update="usuarios-tipos"
-								listener="#{cadastroEventoBean.ativaTermo}" />
-						</p:selectBooleanCheckbox>
+									value="#{cadastroEventoBean.termo}">
+									<p:ajax process="@this" update="usuarios-tipos"
+										listener="#{cadastroEventoBean.ativaTermo}" />
+								</p:selectBooleanCheckbox>
 							</p>
 
 						</p:row>
@@ -123,7 +135,7 @@
 						class="button-salvar" immediate="true" id="voltar-button"
 						update="msg" />
 
-					<p:commandButton value="Salvar" icon="fa far fa-save" immediate="true"
+					<p:commandButton value="Salvar" icon="fa far fa-save"
 						style="margin-top: 20px" process="@form" class="button-salvar"
 						id="salvar-button" action="#{cadastroEventoBean.novoEvento}"
 						update="msg " />
