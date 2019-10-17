@@ -14,6 +14,7 @@ import com.example.demo.model.enums.StatusCadastro;
 import com.example.demo.repository.ReservaRepository;
 import com.example.demo.service.ReservaService;
 import com.example.demo.service.UsuarioService;
+import com.example.demo.util.FacesUtil;
 import com.example.demo.util.NegocioException;
 
 @Service
@@ -37,21 +38,37 @@ public class ReservaServiceImpl implements ReservaService {
 
 	@Override
 	@Transactional
-	public Reserva salvar(Reserva reserva) {
-		Usuario usuario = usuarioService.porId(reserva.getUsuario().getCodigo());
-		verificaUsuarioAtivo(usuario);
-		verificaHorarioReserva(reserva);
-		reserva.setUsuario(usuario);
-		return reservaRepository.saveAndFlush(reserva);
+	public void salvar(Reserva reserva) {
+		if (isTermoResposabilidade(reserva.getTermoDeUso())) {
+
+			Usuario usuario = usuarioService.porId(reserva.getUsuario().getCodigo());
+			verificaUsuarioAtivo(usuario);
+			if (reserva.getCodigo() == null) {
+				verificaHorarioReserva(reserva);
+			}
+			verificaHorarioReserva(reserva);
+			
+			reserva.setUsuario(usuario);
+			reservaRepository.saveAndFlush(reserva);
+		}
+	}
+
+	private boolean isTermoResposabilidade(Boolean termoDeUso) {
+		if (termoDeUso.booleanValue()) {
+			return true;
+		}else {
+			FacesUtil.addWarnMessageDetail("O Termo de Uso não foi Aceito");
+			return false;
+		}
 	}
 
 	private void verificaHorarioReserva(Reserva reserva) {
-		
+
 		Long iniRESERVA = reserva.getDataInicial().getTime();
 		Long fimRESERVA = reserva.getDataFinal().getTime();
-		
-		List<Reserva> reservas = reservaPorDia(reserva.getDataInicial() , reserva.getDataFinal());
-		
+
+		List<Reserva> reservas = reservaPorDia(reserva.getDataInicial(), reserva.getDataFinal());
+
 		for (Reserva reserva2 : reservas) {
 
 			Long iniRESERVA2 = reserva2.getDataInicial().getTime();
@@ -69,10 +86,10 @@ public class ReservaServiceImpl implements ReservaService {
 
 	private List<Reserva> reservaPorDia(Date dataInicial, Date dataFinal) {
 		List<Reserva> listaDia = new ArrayList<Reserva>();
-		
+
 		listaDia.addAll(reservaRepository.findByDataInicialBetween(dataInicial, dataFinal));
 		listaDia.addAll(reservaRepository.findByDataFinalBetween(dataInicial, dataFinal));
-		
+
 		return listaDia;
 	}
 

@@ -10,8 +10,6 @@ public class ScheduleUtil {
 			return "event-RESERVADO";
 		case PEDENTE:
 			return "event-PEDENTE";
-		case CADASTRO:
-			return "event-CADASTRO";
 		case CONCLUIDO:
 			return "event-CONCLUIDO";
 		case EXCUIDO:

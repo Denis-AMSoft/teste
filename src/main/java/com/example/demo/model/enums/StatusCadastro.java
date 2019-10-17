@@ -5,7 +5,6 @@ public  enum StatusCadastro {
 	ATIVO("Ativo"),
 	INATIVO("Inativo"),
 	PEDENTE("Pedente"),
-	CADASTRO("Cadastro"), 
 	EXCUIDO("Excluido");
 	
 	private String descricao;

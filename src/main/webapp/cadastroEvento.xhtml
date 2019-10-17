@@ -60,9 +60,27 @@
 							mindate="#{cadastroEventoBean.reserva.dataInicial}"
 							pattern="dd/MM/yyyy HH:mm" locale="pt" />
 
-						<p:outputLabel value="Descrição do Evento :" />
-						<p:inputTextarea rows="6" cols="40"
-							value="#{cadastroEventoBean.reserva.descricao}" />
+						<p:outputLabel value="Tipo Evento : " />
+						<p:selectOneMenu value="#{cadastroEventoBean.reserva.tipoevento}">
+							<f:selectItems var="tipoEvento"
+								value="#{cadastroEventoBean.tipoEvento}"
+								itemLabel="#{tipoEvento.descricao}" itemValue="#{tipoEvento}" />
+							<p:ajax event="change" update="frm" process="@this" />
+						</p:selectOneMenu>
+
+						<p:row id="descricaoOutro"
+							rendered="#{cadastroEventoBean.reserva.tipoevento == 'OUTRO'}">
+							<p:outputLabel value="Descrição do Evento :" />
+						</p:row>
+						<p:row id="descricaoEvento"
+							rendered="#{cadastroEventoBean.reserva.tipoevento == 'OUTRO'}">
+							<p:inputTextarea rows="6" cols="40"
+								value="#{cadastroEventoBean.reserva.descricao}" />
+						</p:row>
+
+						<p:outputLabel value="Quantidade de Pessoas :" />
+						<p:inputNumber
+							value="#{cadastroEventoBean.reserva.quantidadePessoal}" />
 
 						<p:outputLabel value="Assinatura : " />
 						<p:row>
@@ -76,7 +94,22 @@
 									onclick="PF('sig').clear()" />
 							</div>
 						</p:row>
+						<p:outputLabel />
+						<p:row>
+							<p>
+								Eu
+								<p:commandLink value="aceito os termos" ajax="false" immediate="true" >
+									<p:fileDownload value="#{cadastroEventoBean.termoDeUso()}"  />
+								</p:commandLink>
+								e condições:
+								<p:selectBooleanButton id="aceitoTermo"
+									value="#{cadastroEventoBean.reserva.termoDeUso}" onLabel="Sim"
+									offLabel="Não" style="width:60px" />
+							</p>
+
+						</p:row>
 					</p:panelGrid>
+
 				</div>
 				<center>
 
@@ -92,6 +125,9 @@
 
 				</center>
 			</p:fieldset>
+			<p:dialog header="Termo de Uso" widgetVar="termoDeUso" height="100">
+				<h:outputText value="This is a Modal Dialog." />
+			</p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

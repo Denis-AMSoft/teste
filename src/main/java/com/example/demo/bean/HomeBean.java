@@ -92,7 +92,7 @@ public class HomeBean implements Serializable {
 
 	public void salvarEvento(ActionEvent actionEvent) {
 		try {
-			reserva = service.salvar(reserva);
+			service.salvar(reserva);
 			emailService.enviar(reserva);
 			emailService.enviarNovoEvento(reserva);
 			FacesUtil.addInfoMessage("Reserva Atualizada com sucesso!!!");

@@ -46,7 +46,7 @@ public class ListaEventosBean implements Serializable {
 	
 	public void salvarEvento(Reserva reserva) {
 		try {	
-			reserva = service.salvar(reserva);
+			service.salvar(reserva);
 			emailService.enviar(reserva);
 			FacesUtil.addInfoMessage("Reserva Atualizada com sucesso!!!");
 		} catch (Exception e) {

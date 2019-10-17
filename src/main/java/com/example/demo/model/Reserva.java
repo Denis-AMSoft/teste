@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.Length;
 
 import com.example.demo.model.enums.StatusReserva;
+import com.example.demo.model.enums.TipoEvento;
 
 
 @Entity
@@ -48,14 +49,23 @@ public class Reserva  implements Serializable {
 	private String assinatura;
 	
 	@NotNull
+	private Integer quantidadePessoal;
+	
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status_reserva", nullable = false)
-	private StatusReserva statusReserva = StatusReserva.CADASTRO;
+	private StatusReserva statusReserva = StatusReserva.PEDENTE;
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "tipo_evento", nullable = false)
+	private TipoEvento tipoevento;
+	
+	private Boolean termoDeUso = false ;
 	
 	
 	public Reserva(Long codigo, Usuario usuario, Date dataInicial, Date dataFinal, String descricao, String assinatura,
-			@NotNull StatusReserva statusReserva) {
-		super();
+			@NotNull StatusReserva statusReserva, @NotNull TipoEvento tipoEvento, Integer quantidadePessoal) {
 		this.codigo = codigo;
 		this.usuario = usuario;
 		this.dataInicial = dataInicial;
@@ -63,10 +73,11 @@ public class Reserva  implements Serializable {
 		this.descricao = descricao;
 		this.assinatura = assinatura;
 		this.statusReserva = statusReserva;
+		this.quantidadePessoal = quantidadePessoal;
+		this.tipoevento = tipoEvento;
 	}
 
-	public Reserva() {
-		
+	public Reserva() {	
 	}
 
 	public Long getCodigo() {
@@ -124,5 +135,29 @@ public class Reserva  implements Serializable {
 	public void setStatusReserva(StatusReserva statusReserva) {
 		this.statusReserva = statusReserva;
 	}
-	
+
+	public Boolean getTermoDeUso() {
+		return termoDeUso;
+	}
+
+	public void setTermoDeUso(Boolean termoDeUso) {
+		this.termoDeUso = termoDeUso;
+	}
+
+	public TipoEvento getTipoevento() {
+		return tipoevento;
+	}
+
+	public void setTipoevento(TipoEvento tipoevento) {
+		this.tipoevento = tipoevento;
+	}
+
+	public Integer getQuantidadePessoal() {
+		return quantidadePessoal;
+	}
+
+	public void setQuantidadePessoal(Integer quantidadePessoal) {
+		this.quantidadePessoal = quantidadePessoal;
+	}
+		
 }

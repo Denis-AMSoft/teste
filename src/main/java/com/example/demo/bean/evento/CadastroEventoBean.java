@@ -1,5 +1,6 @@
 package com.example.demo.bean.evento;
 
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -9,9 +10,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 import javax.servlet.http.HttpServletRequest;
 
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.demo.model.Reserva;
+import com.example.demo.model.enums.TipoEvento;
 import com.example.demo.security.Seguranca;
 import com.example.demo.service.EmailService;
 import com.example.demo.service.ReservaService;
@@ -55,7 +59,7 @@ public class CadastroEventoBean implements Serializable {
 
 	public void novoEvento() {
 		try {
-			reserva = service.salvar(reserva);
+			service.salvar(reserva);
 			emailService.enviar(reserva);
 			emailService.enviarNovoEvento(reserva);
 			FacesUtil.addInfoMessage("Evento " + reserva.getCodigo() + "  salvo !!");
@@ -65,6 +69,12 @@ public class CadastroEventoBean implements Serializable {
 			FacesUtil.addErrorMessage("ERRO :" + e.getMessage());
 		}
 	}
+	
+	public StreamedContent termoDeUso() {
+		  InputStream stream = FacesContext.getCurrentInstance().getExternalContext().getResourceAsStream("/resources/termo_de_responsabilidade.pdf");
+	        DefaultStreamedContent file = new DefaultStreamedContent(stream, "application/pdf", "termo_de_responsabilidade.pdf");
+	        return file;
+	}
 
 	private void limpar() {
 		reserva = new Reserva();
@@ -73,6 +83,10 @@ public class CadastroEventoBean implements Serializable {
 		}
 	}
 
+	public TipoEvento[] getTipoEvento() {
+		return TipoEvento.values();
+	}
+	
 	public boolean isEditando() {
 		return reserva != null;
 	}

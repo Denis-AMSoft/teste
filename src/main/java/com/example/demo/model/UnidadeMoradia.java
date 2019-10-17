@@ -34,7 +34,7 @@ public class UnidadeMoradia implements Serializable {
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status_unidade_moradia", nullable = false)
-	private StatusCadastro statusUnidadeMoradia = StatusCadastro.CADASTRO;
+	private StatusCadastro statusUnidadeMoradia = StatusCadastro.PEDENTE;
 
 	public StatusCadastro getStatusUnidadeMoradia() {
 		return statusUnidadeMoradia;

@@ -3,8 +3,7 @@ package com.example.demo.model.enums;
 public enum StatusReserva {
 	
 	RESERVADO("Reservado"),
-	PEDENTE("Pedente"),
-	CADASTRO("Cadastro"), 
+	PEDENTE("Pedente"), 
 	CONCLUIDO("Concluido"),
 	EXCUIDO("Excluido");
 	

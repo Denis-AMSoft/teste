@@ -64,7 +64,7 @@ public class Usuario implements Serializable {
 	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status_usuario", nullable = false)
-	private StatusCadastro statusUsuario = StatusCadastro.CADASTRO;
+	private StatusCadastro statusUsuario = StatusCadastro.PEDENTE;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "permissao")

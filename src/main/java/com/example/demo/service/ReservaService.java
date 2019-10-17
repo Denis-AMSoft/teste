@@ -13,7 +13,7 @@ public interface ReservaService {
 
 	void remover(Reserva reserva);
 
-	Reserva salvar(Reserva reserva);
+	void salvar(Reserva reserva);
 
 	Reserva porId(Long id);
 
